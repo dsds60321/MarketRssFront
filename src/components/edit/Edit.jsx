@@ -36,7 +36,7 @@ export default function Edit() {
               </select>
             </div>
             <div className={classes.formGroup}>
-              <label htmlFor="fund">펀드 선택</label>
+              <label htmlFor="fund">ETF 선택</label>
               <select id="fund">
                 <option>글로벌 주식혼합형</option>
                 <option>국내 채권혼합형</option>
@@ -67,7 +67,7 @@ export default function Edit() {
               <span className={classes.date}>2023-04-30</span>
             </div>
             <div className={classes.item}>
-              <span className={classes.category}>펀드</span>
+              <span className={classes.category}>ETF</span>
               <span className={classes.name}>FNGU</span>
               <span className={classes.date}>2023-04-30</span>
             </div>
