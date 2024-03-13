@@ -1,0 +1,73 @@
+.contentWrapper {
+    display: flex;          /* Flexbox 사용 */
+    flex-direction: column; /* 자식 요소들을 세로로 정렬 */
+    justify-content: space-between; /* 상단 컨텐츠와 페이지네이션 사이의 공간을 최대화 */
+    min-height: 86vh;      /* 내부 콘텐츠의 크기가 작을 때도 전체 높이를 화면에 맞출 수 있도록 설정 */
+}
+
+/* 중형 기기 (태블릿 등, 화면 너비가 768px ~ 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .contentWrapper {
+        min-height: 88vh; /* 중형 기기에 맞춤 */
+    }
+}
+
+/* 소형 기기 (대형 스마트폰, 화면 너비가 576px ~ 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .contentWrapper {
+        min-height: 80vh; /* 소형 기기에 맞춤 */
+    }
+}
+
+/* 매우 소형 기기 (소형 스마트폰, 화면 너비가 575px 이하) */
+@media (max-width: 575px) {
+    .contentWrapper {
+        min-height: 83vh; /* 매우 소형 기기에 맞춤 */
+    }
+}
+
+.newsList {
+    display: block; /* flex 대신 block 디스플레이 사용 */
+    padding: 10px;
+}
+
+.newsItem {
+    display: block; /* 각 리스트 아이템을 block 레벨 요소로 설정 */
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 그림자를 약간 더 섬세하게 조정 */
+    margin-bottom: 15px; /* 아이템 사이의 간격 */
+    color: initial;
+    text-decoration: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.newsItem:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 효과를 약간 변형 */
+}
+
+.newsImg {
+    width: 100%; /* 이미지의 너비를 100%로 유지하여 너비를 꽉 채우도록 */
+    height: auto; /* 높이를 auto로 조정해 고정 높이에서 비율에 맞게 조정 */
+    object-fit: cover; /* 이미지 비율 유지 */
+}
+
+.newsContent {
+    padding: 15px;
+}
+
+.newsTitle {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #333;
+}
+
+.newsSummary {
+    font-size: 14px;
+    color: #666;
+}
+
+.newsDate {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+}
