@@ -1,0 +1,97 @@
+.editContainer {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .editContainer {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+}
+
+.card {
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+.card h2 {
+    margin-top: 0;
+}
+.formGroup {
+    margin-bottom: 15px;
+}
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+.formGroup input,
+.formGroup select {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.formGroup button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.formGroup button:hover {
+    background-color: #0056b3;
+}
+
+.selections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+    .selections {
+        display: inline;
+    }
+}
+
+.tag {
+    display: grid;
+    place-items: center;
+    background-color: rgba(105, 98, 98, 0.5);
+    color: white;
+    padding: 5px 10px;
+    font-size: 10px;
+    border-radius: 15px;
+    margin: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.tag:hover {
+    transform: rotateX(5deg) rotateY(10deg); /* 마우스 호버 시 기울기 추가 */
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* 마우스 호버 시 그림자 강조 */
+}
+
+@media (max-width: 480px) {
+    .tag {
+        font-size: 8px;
+        padding: 5px 10px;
+    }
+}
