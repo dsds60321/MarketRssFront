@@ -19,6 +19,13 @@ body {
 .contents {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 83vh;
+}
+
+.content {
+    flex: 1;
 }
 
 /* 반응형 레이아웃 */

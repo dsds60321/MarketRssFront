@@ -1,0 +1,13 @@
+.footer {
+    background-color: #F2F2F2; /* Footer 배경 색 */
+    color: #333; /* 텍스트 색상 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    padding: 20px 0; /* 상하 패딩 */
+    margin-top: 20px; /* 컨텐츠와의 간격 */
+    width: 100%; /* 전체 너비 */
+}
+
+.footer-content p {
+    margin: 0; /* 기본 마진 제거 */
+    font-size: 16px; /* 폰트 크기 */
+}
