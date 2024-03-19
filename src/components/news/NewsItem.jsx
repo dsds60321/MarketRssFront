@@ -1,4 +1,4 @@
-import classes from "./News.module.css";
+import classes from './NewsItem.module.css';
 
 export default function NewsItem({news}) {
   return (

@@ -1,6 +1,6 @@
 import classes from './News.module.css';
-import Pagination from "../pagination/Pagination.jsx";
-import NewsItem from "./NewsItem.jsx";
+import Pagination from "../../components/pagination/Pagination.jsx";
+import NewsItem from "../../components/news/NewsItem.jsx";
 
 const newsList = [
   {
