@@ -1,41 +1,41 @@
 .header {
-    display: flex;
-    justify-content: center;
-    background-color: #FFFFFF; /* 배경색 변경: */
-    color: #333333; /* 텍스트 색상 변경: */
-    padding: 20px;
-    font-size: calc(10px + 2vmin);
-    border-bottom: 1px solid #EAEAEA; /* 경계선 색상 변경: */
-    text-align: center;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff; /* 배경색 변경: */
+  color: #333333; /* 텍스트 색상 변경: */
+  padding: 20px;
+  font-size: calc(10px + 2vmin);
+  border-bottom: 1px solid #eaeaea; /* 경계선 색상 변경: */
+  text-align: center;
+  width: 100%;
 }
 
-.header nav ul{
-    display: flex;
+.header nav ul {
+  display: flex;
 }
 
 .header ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .header li {
-    float: left;
-    margin-right: 20px; /* 항목 사이 간격 추가 */
+  float: left;
+  margin-right: 20px; /* 항목 사이 간격 추가 */
 }
 
 .header li a {
-    font-weight: bold;
-    display: block;
-    color: #333333; /* 링크 텍스트 색상 변경: */
-    text-align: center;
-    padding: 10px 10vh;
-    font-size: 20px;
-    text-decoration: none;
+  font-weight: bold;
+  display: block;
+  color: #333333; /* 링크 텍스트 색상 변경: */
+  text-align: center;
+  padding: 10px 10vh;
+  font-size: 20px;
+  text-decoration: none;
 }
 
 .header li a:hover {
-    color: #afafaf; /* 호버 시 글자색 변경 */
+  color: #afafaf; /* 호버 시 글자색 변경 */
 }

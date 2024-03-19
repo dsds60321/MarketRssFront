@@ -1,22 +1,22 @@
 import classes from './Edit.module.css';
 export default function Edit() {
-  return(
+  return (
     <>
-      <div className='content'>
+      <div className="content">
         <div className={classes.editContainer}>
           <div className={classes.card}>
             <h2>정보 수정</h2>
             <div className={classes.formGroup}>
               <label htmlFor="nickname">닉네임</label>
-              <input type="text" id="nickname" placeholder="닉네임 입력"/>
+              <input type="text" id="nickname" placeholder="닉네임 입력" />
             </div>
             <div className={classes.formGroup}>
               <label htmlFor="password">패스워드</label>
-              <input type="password" id="password" placeholder="패스워드 입력"/>
+              <input type="password" id="password" placeholder="패스워드 입력" />
             </div>
             <div className={classes.formGroup}>
               <label htmlFor="email">이메일</label>
-              <input type="email" id="email" placeholder="이메일 입력"/>
+              <input type="email" id="email" placeholder="이메일 입력" />
             </div>
             <div className={classes.formGroup}>
               <button>수정</button>
@@ -46,12 +46,8 @@ export default function Edit() {
               </select>
             </div>
             <div className={classes.selections} id="selections">
-              <div className={classes.tag}>
-                삼성전자
-              </div>
-              <div className={classes.tag}>
-                글로벌 주식혼합형
-              </div>
+              <div className={classes.tag}>삼성전자</div>
+              <div className={classes.tag}>글로벌 주식혼합형</div>
             </div>
             <div className={classes.formGroup}>
               <button>등록</button>
@@ -101,5 +97,5 @@ export default function Edit() {
         </div>
       </div>
     </>
-  )
+  );
 }

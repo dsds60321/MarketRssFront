@@ -1,0 +1,5 @@
+.errorMessage {
+    color: #ff4747; /* 오류 메시지 색상 */
+    font-size: 12px; /* 오류 메시지 크기 */
+    margin-top: 5px; /* 오류 메시지와 입력창 사이 간격 */
+}

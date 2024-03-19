@@ -1,185 +1,193 @@
 .container {
-    display: flex;
-    justify-content: center; /* 가로축 중앙 정렬 */
-    align-items: center; /* 세로축 중앙 정렬 */
-    flex-direction: column;
+  display: flex;
+  justify-content: center; /* 가로축 중앙 정렬 */
+  align-items: center; /* 세로축 중앙 정렬 */
+  flex-direction: column;
 }
 
 .editContainer {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
 }
 
 @media (min-width: 768px) {
-    .editContainer {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-    }
+  .editContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 
 .card {
-    background: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 .card h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 .formGroup {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 .formGroup label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 .formGroup input,
 .formGroup select {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 .formGroup button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 .formGroup button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .selections {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 @media (max-width: 480px) {
-    .selections {
-        display: inline;
-    }
+  .selections {
+    display: inline;
+  }
 }
 
 .tag {
-    display: grid;
-    place-items: center;
-    background-color: rgba(105, 98, 98, 0.5);
-    color: white;
-    padding: 5px 10px;
-    font-size: 10px;
-    border-radius: 15px;
-    margin: 5px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
+  display: grid;
+  place-items: center;
+  background-color: rgba(105, 98, 98, 0.5);
+  color: white;
+  padding: 5px 10px;
+  font-size: 10px;
+  border-radius: 15px;
+  margin: 5px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 .tag:hover {
-    /*transform: rotateX(20deg) rotateY(5deg); !* 마우스 호버 시 기울기 추가 *!*/
-    transform: scale(1.3);
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* 마우스 호버 시 그림자 강조 */
+  /*transform: rotateX(20deg) rotateY(5deg); !* 마우스 호버 시 기울기 추가 *!*/
+  transform: scale(1.3);
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* 마우스 호버 시 그림자 강조 */
 }
 
 @media (max-width: 480px) {
-    .tag {
-        font-size: 8px;
-        padding: 5px 10px;
-    }
+  .tag {
+    font-size: 8px;
+    padding: 5px 10px;
+  }
 }
 
 /* 리스트 박스 스타일링 */
 .listBox {
-    width: 100%; /* 반응형 디자인을 위해 너비를 %로 설정 */
-    max-width: 860px; /* 최대 너비 설정 */
-    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
-    background-color: #fff; /* 배경색 추가 */
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px; /* 리스트 아이템과의 간격 */
-    max-height: 350px;
+  width: 100%; /* 반응형 디자인을 위해 너비를 %로 설정 */
+  max-width: 860px; /* 최대 너비 설정 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+  background-color: #fff; /* 배경색 추가 */
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px; /* 리스트 아이템과의 간격 */
+  max-height: 350px;
 }
 
 .listBox h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 15px;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
 .item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0; /* 아이템 상하 패딩 */
-    border-bottom: 1px solid #eee; /* 아이템 간 구분선 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0; /* 아이템 상하 패딩 */
+  border-bottom: 1px solid #eee; /* 아이템 간 구분선 */
 }
 
-.category, .name, .date {
-    margin: 5px 0; /* 아이템 내부 요소 간격 조정 */
+.category,
+.name,
+.date {
+  margin: 5px 0; /* 아이템 내부 요소 간격 조정 */
 }
 
 .category {
-    font-weight: bold;
-    color: #007bff;
+  font-weight: bold;
+  color: #007bff;
 }
 
 .date {
-    font-size: 12px;
-    color: #aaa;
+  font-size: 12px;
+  color: #aaa;
 }
 
 /* 기존 리스트 박스 스타일링에 추가 */
 .scrollIndicator {
-    text-align: center;
-    padding: 10px;
-    font-size: 12px;
-    color: #777;
-    background-color: #f1eeee;
-    border-top: 1px solid #eee;
-    border-radius: 8px;
-    width: calc(100% - 80%);
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #777;
+  background-color: #f1eeee;
+  border-top: 1px solid #eee;
+  border-radius: 8px;
+  width: calc(100% - 80%);
 }
 
 /* 스크롤 인디케이터에 대한 애니메이션 효과를 위한 스타일 */
 .scrollIndicator::after {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-left: 5px;
-    border-right: 2px solid #777;
-    border-bottom: 2px solid #777;
-    transform: rotate(45deg);
-    animation: bounce 2s infinite;
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  border-right: 2px solid #777;
+  border-bottom: 2px solid #777;
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
 }
 
 /* 스크롤 인디케이터의 애니메이션 */
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0) rotate(45deg);
-    }
-    40% {
-        transform: translateY(-5px) rotate(45deg);
-    }
-    60% {
-        transform: translateY(-3px) rotate(45deg);
-    }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+  40% {
+    transform: translateY(-5px) rotate(45deg);
+  }
+  60% {
+    transform: translateY(-3px) rotate(45deg);
+  }
 }

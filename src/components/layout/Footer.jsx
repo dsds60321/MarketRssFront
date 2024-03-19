@@ -1,5 +1,5 @@
-import classes from './Footer.module.css'
-export default function Footer(){
+import classes from './Footer.module.css';
+export default function Footer() {
   return (
     <>
       <div className={classes.footer}>
@@ -8,5 +8,5 @@ export default function Footer(){
         </div>
       </div>
     </>
-  )
+  );
 }
