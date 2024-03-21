@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 
 export const AuthContext = createContext({
   setTokens: () => {},
-  token: {},
+  authTokens: {},
 });
 
 export default function AuthContextProvider({ children }) {
@@ -11,10 +11,13 @@ export default function AuthContextProvider({ children }) {
   const setTokens = (data) => {
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('refreshToken', data.refreshToken);
-    setAuthTokens(data);
+    sessionStorage.setItem('isLogin', true);
+    setAuthTokens(data.accessToken);
   };
 
-  const ctxValue = { setTokens, token: authTokens };
+  console.log(authTokens);
+
+  const ctxValue = { setTokens, authTokens };
 
   return <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>;
 }

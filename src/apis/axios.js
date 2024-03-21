@@ -31,9 +31,19 @@ instance.interceptors.response.use(
 
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
       const refreshToken = localStorage.getItem('refreshToken');
 
-      const response = await axios.post('/api/v1/auth/refresh-token', { refreshToken });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/refresh-token`,
+        { refreshToken },
+        {
+          headers: {
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        }
+      );
+
       if (response.status === 200) {
         localStorage.setItem('accessToken', response.data.accessToken);
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;

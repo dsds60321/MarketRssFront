@@ -6,14 +6,6 @@ import SignUp from '../pages/signUp/SignUp.jsx';
 
 const routes = [
   {
-    path: '/sign-in',
-    element: <Login />,
-  },
-  {
-    path: '/sign-up',
-    element: <SignUp />,
-  },
-  {
     path: '/',
     element: <Layout />,
     children: [
