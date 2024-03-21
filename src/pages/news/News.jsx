@@ -1,6 +1,7 @@
 import classes from './News.module.css';
 import Pagination from '../../components/pagination/Pagination.jsx';
 import NewsItem from '../../components/news/NewsItem.jsx';
+import { getNews } from '@/apis/news.js';
 
 const newsList = [
   {
@@ -19,6 +20,7 @@ const newsList = [
   },
 ];
 export default function News() {
+  getNews();
   return (
     <>
       <div className="content">

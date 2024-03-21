@@ -3,34 +3,42 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@components/common/Common.jsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Toast, { toastNotification } from '@components/common/ToastNotify.jsx';
-import { duplicateIdReq } from '@/apis/auth.js';
+import { fetchDuplicateIdReq, fetchSignUpReq, fetchVerificationReq } from '@/apis/auth.js';
+import { TOAST_MESSAGE, TOAST_TYPE } from '@/common/const/toast.js';
 
 export default function SignUp() {
-  const [isSendAuth, setIsSendAuth] = useState(false);
-  const navigate = useNavigate();
-
-  console.log(isSendAuth);
-  const handleIsSendAuth = () => {
-    setIsSendAuth(!isSendAuth);
-  };
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitting, isSubmitted, errors },
     getValues,
   } = useForm();
 
-  const onSubmit = async (form) => {
+  const [isSendAuth, setIsSendAuth] = useState(false);
+  const navigate = useNavigate();
+
+  const handleIsSendAuth = () => {
+    setIsSendAuth(!isSendAuth);
+  };
+
+  const validatePassword = (value) => {
+    return value === watch('password') || '비밀번호가 일치하지 않습니다.';
+  };
+
+  const fetchSignUp = async (form) => {
     const signUpReq = JSON.stringify(form);
-    const { status } = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/sign-up`,
-      signUpReq
-    );
+
+    const { status } = await fetchSignUpReq(signUpReq);
 
     if (status === 200) {
       navigate('/sign-in');
+      toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.SU_SIGN_UP });
+    } else if (status === 400) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
     }
   };
 
@@ -40,17 +48,23 @@ export default function SignUp() {
     const { id: idError } = errors;
 
     if (!id) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
 
     if (idError) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
 
-    const { status } = await duplicateIdReq(id);
+    const { status } = await fetchDuplicateIdReq(id);
 
     if (status === 200) {
-      toastNotification({ type: 'success', text: '중복된 아이디가 없습니다.' });
+      toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.NO_DUPLICATE_ID });
+    } else if (status === 400) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
     }
   };
 
@@ -60,25 +74,26 @@ export default function SignUp() {
     const { id, password, email } = certificationReq;
 
     if (!id || !password || !email) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
 
-    handleIsSendAuth();
-    const { status } = await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/email-certification`,
-      certificationReq
-    );
+    const { status } = await fetchVerificationReq(certificationReq);
 
     if (status === 200) {
       handleIsSendAuth();
-      alert('이메일 확인해주세요');
+      toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.CHECK_EMAIL });
+    } else if (status === 400) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
     }
   };
 
   return (
     <div className={classes.signupForm}>
       <Toast />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(fetchSignUp)}>
         <h2>회원 가입</h2>
         <div className={classes.verificationForm}>
           <input
@@ -118,7 +133,13 @@ export default function SignUp() {
             },
           })}
         />
+        <input
+          type="password"
+          placeholder="비밀번호 재입력"
+          {...register('confirmPassword', { validate: validatePassword })}
+        />
         {errors.password && <ErrorMessage message={errors.password.message} />}
+        {errors.confirmPassword && <ErrorMessage message={errors.confirmPassword.message} />}
         <br />
         <input
           type="email"
@@ -163,7 +184,7 @@ export default function SignUp() {
           type={isSendAuth ? 'submit' : 'button'}
           disabled={isSubmitting}
         >
-          로그인
+          회원가입
         </button>
       </form>
     </div>
