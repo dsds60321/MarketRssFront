@@ -1,7 +1,6 @@
 import classes from './NewsItem.module.css';
 
 export default function NewsItem({ news }) {
-  console.log(news.image_url);
   return (
     <>
       <div>

@@ -32,19 +32,12 @@ export default function News() {
     };
 
     fetchGetNewsList();
-
-    console.log(newsList);
   }, []);
-  console.log(newsList);
   return (
     <>
       <div className="content">
         <div className={classes.contentWrapper}>
           <div className={classes.newsList}>
-            {/*{newsList2.map((news, index) => (*/}
-            {/*  <NewsItem news={news} key={`${news.title}_${index}`} />*/}
-            {/*))}*/}
-
             {newsList?.map((news) => (
               <NewsItem news={news} key={news.uuid} />
             ))}
