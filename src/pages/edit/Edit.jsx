@@ -1,6 +1,6 @@
 import classes from './Edit.module.css';
 import { fetchStockRegist, fetchUserDetails } from '@/apis/edit.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toastNotification } from '@components/common/ToastNotify.jsx';
 import { TOAST_MESSAGE, TOAST_TYPE } from '@/common/const/toast.js';
 import { US_STOCK } from '@/assets/usStock.js';
@@ -8,21 +8,43 @@ import { ToastContainer } from 'react-toastify';
 export default function Edit() {
   const [datas, setDatas] = useState({});
   const [toggles, setToggles] = useState([]);
+  const [originToggles, setOriginToggles] = useState([]);
+  const divRef = useRef(null);
+  const [isOverflow, setIsOverflow] = useState(false);
 
   // init Method
+  const checkDivHeight = () => {
+    setTimeout(() => {
+      if (divRef.current) {
+        const isHeightOverflow = divRef.current.offsetHeight > 350; // 200px을 기준으로 설정
+        setIsOverflow(isHeightOverflow);
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     const getUserDetails = async () => {
       const { status, data } = await fetchUserDetails();
 
       if (status === 200) {
         setDatas({ userPayload: data.userPayload, stockPayload: data.stockPayload });
-        setToggles(data.stockPayload.stocks);
+        const stocks = data.stockPayload.stocks.filter((stock) => stock !== '');
+        setOriginToggles(stocks);
+        setToggles(stocks);
       } else {
         toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
       }
     };
 
     getUserDetails();
+
+    checkDivHeight();
+    // 창 크기가 변경될 때마다 높이를 재확인합니다.
+    window.addEventListener('resize', checkDivHeight);
+
+    return () => {
+      window.removeEventListener('resize', checkDivHeight);
+    };
   }, []);
 
   const handleToggles = ({ target }) => {
@@ -43,7 +65,10 @@ export default function Edit() {
   };
 
   const registStock = async () => {
-    console.log(toggles);
+    if (originToggles === toggles) {
+      toastNotification({ type: TOAST_TYPE.DEFAULT, text: TOAST_MESSAGE.NO_CHANGES_DETECTED });
+      return;
+    }
     const { status, data } = await fetchStockRegist({ stocks: toggles });
     if (status === 200) {
       toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.SUCCESS });
@@ -111,45 +136,17 @@ export default function Edit() {
           </div>
         </div>
         <div className={classes.container}>
-          <div className={classes.listBox}>
-            <h2>리스트 아이템</h2>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>ETF</span>
-              <span className={classes.name}>FNGU</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
-            <div className={classes.item}>
-              <span className={classes.category}>주식</span>
-              <span className={classes.name}>삼성전자</span>
-              <span className={classes.date}>2023-04-30</span>
-            </div>
+          <div className={classes.listBox} ref={divRef}>
+            <h2>주식</h2>
+            {datas.stockPayload?.stocks.map((stock) => (
+              <div key={stock} className={classes.item}>
+                <span className={classes.category}>주식</span>
+                <span className={classes.name}>{stock}</span>
+                <span className={classes.date}>2023-04-30</span>
+              </div>
+            ))}
           </div>
-          <div className={classes.scrollIndicator}>스크롤해서 더 보기</div>
+          {isOverflow && <div className={classes.scrollIndicator}>스크롤해서 더 보기</div>}
         </div>
       </div>
     </>

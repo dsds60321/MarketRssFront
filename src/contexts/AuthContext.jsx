@@ -15,8 +15,6 @@ export default function AuthContextProvider({ children }) {
     setAuthTokens(data.accessToken);
   };
 
-  console.log(authTokens);
-
   const ctxValue = { setTokens, authTokens };
 
   return <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>;

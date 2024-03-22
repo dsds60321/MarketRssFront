@@ -1,7 +1,7 @@
 import { Slide, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const autoClose = 1000;
+const autoClose = 500;
 
 export const toastNotification = ({ type, text }) => {
   switch (type) {

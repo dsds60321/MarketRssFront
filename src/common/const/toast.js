@@ -6,6 +6,7 @@ const TOAST_TYPE = {
 };
 
 const TOAST_MESSAGE = {
+  NO_CHANGES_DETECTED: '변경된 내용이 없습니다.',
   SUCCESS: '저장이 완료 되었습니다.',
   NO_DUPLICATE_ID: '중복된 아이디가 없습니다.',
   SU_SIGN_UP: '회원가입에 성공 했습니다.',

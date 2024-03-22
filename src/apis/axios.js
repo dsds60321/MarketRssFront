@@ -51,7 +51,9 @@ instance.interceptors.response.use(
       }
     }
 
-    // location.href = '/sign-in';
+    if (error.response.status === 403) {
+      location.href = '/sign-in';
+    }
     return Promise.reject(error);
   }
 );

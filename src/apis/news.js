@@ -1,6 +1,9 @@
 import axios from '@/apis/axios.js';
 
 export const getNews = async () => {
-  const data = await axios('/news');
-  console.log(data);
+  try {
+    return await axios('/news');
+  } catch (e) {
+    console.log(e);
+  }
 };
