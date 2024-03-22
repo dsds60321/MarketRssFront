@@ -2,8 +2,9 @@ import classes from './News.module.css';
 import Pagination from '../../components/pagination/Pagination.jsx';
 import NewsItem from '../../components/news/NewsItem.jsx';
 import { getNews } from '@/apis/news.js';
+import { useEffect, useState } from 'react';
 
-const newsList = [
+const newsList2 = [
   {
     title: 'News Title',
     description: 'description',
@@ -20,16 +21,35 @@ const newsList = [
   },
 ];
 export default function News() {
-  getNews();
+  const [newsList, setNewsList] = useState(null);
+  useEffect(() => {
+    const fetchGetNewsList = async () => {
+      const { status, data } = await getNews();
+
+      if (status === 200) {
+        setNewsList(data.news.data);
+      }
+    };
+
+    fetchGetNewsList();
+
+    console.log(newsList);
+  }, []);
+  console.log(newsList);
   return (
     <>
       <div className="content">
         <div className={classes.contentWrapper}>
           <div className={classes.newsList}>
-            {newsList.map((news, index) => (
-              <NewsItem news={news} key={`${news.title}_${index}`} />
+            {/*{newsList2.map((news, index) => (*/}
+            {/*  <NewsItem news={news} key={`${news.title}_${index}`} />*/}
+            {/*))}*/}
+
+            {newsList?.map((news) => (
+              <NewsItem news={news} key={news.uuid} />
             ))}
           </div>
+
           <Pagination />
         </div>
       </div>
