@@ -11,8 +11,7 @@ export default function News() {
       const { status, data } = await fetchGetNews();
 
       if (status === 200) {
-        // setNewsList(data.news.data);
-        setNewsList(null);
+        setNewsList(data.news.data);
       }
     };
 
