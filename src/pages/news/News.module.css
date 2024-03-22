@@ -30,3 +30,14 @@
   display: block; /* flex 대신 block 디스플레이 사용 */
   padding: 10px;
 }
+
+.noData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* 높이를 조정하여 가운데 정렬이 잘 되도록 합니다. 필요에 따라 조정하세요. */
+  background-color: white; /* 배경색을 흰색으로 설정 */
+  color: #333; /* 글자 색상, 필요에 따라 조정 */
+  font-size: 20px; /* 글자 크기를 크게 설정 */
+  font-weight: bold; /* 글자를 굵게 */
+}
