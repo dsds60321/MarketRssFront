@@ -162,6 +162,30 @@
   width: calc(100% - 80%);
 }
 
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.checkboxWrapper div {
+  margin : 10px;
+}
+
+.checkboxLabel {
+  margin-left: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(62, 67, 71);
+}
+
+.checkboxInput.kakao {
+  accent-color: #FEE500;
+}
+
+.checkboxInput.email {
+  accent-color: #007BFF;
+}
+
 /* 스크롤 인디케이터에 대한 애니메이션 효과를 위한 스타일 */
 .scrollIndicator::after {
   content: '';

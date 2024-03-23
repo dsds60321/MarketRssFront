@@ -8,11 +8,11 @@ export default function Header() {
           <ul>
             <li>
               <Link href="#" to="">
-                News
+                NEWS
               </Link>
             </li>
             <li>
-              <Link to="edit">Edit</Link>
+              <Link to="edit">EDIT</Link>
             </li>
           </ul>
         </nav>

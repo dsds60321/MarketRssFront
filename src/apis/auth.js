@@ -10,7 +10,7 @@ export const fetchDuplicateIdReq = async (id) => {
     return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/id-check`, { id });
   } catch (e) {
     console.error('fetchDuplicateIdReq : ', e);
-    return e;
+    return e.response;
   }
 };
 
@@ -27,7 +27,7 @@ export const fetchVerificationReq = async (certificationReq) => {
     );
   } catch (e) {
     console.error('fetchVerificationReq : ', e);
-    return e;
+    return e.response;
   }
 };
 
@@ -45,6 +45,19 @@ export const fetchSignUpReq = async (signUpReq) => {
     });
   } catch (e) {
     console.error('fetchSignUpReq : ', e);
-    return e;
+    return e.response;
+  }
+};
+
+export const fetchSignInReq = async (singInReq) => {
+  try {
+    return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/sign-in`, singInReq, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (e) {
+    console.error('fetchSignInReq : ', e);
+    return e.response;
   }
 };

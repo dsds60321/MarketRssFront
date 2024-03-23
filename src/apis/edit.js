@@ -5,6 +5,7 @@ export const fetchUserDetails = async () => {
     return await axios.get('/edit');
   } catch (e) {
     console.error(e);
+    return e.response;
   }
 };
 
@@ -13,5 +14,6 @@ export const fetchStockRegist = async (stockReq) => {
     return await axios.post('/edit/stock', stockReq);
   } catch (e) {
     console.error(e);
+    return e.response;
   }
 };

@@ -1,21 +1,35 @@
 import classes from './Pagination.module.css';
 
-export default function Pagination() {
+export default function Pagination({ currentPage, newsPerPage, totalNews, paginate }) {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <>
-      <div className={classes.paginationContainer}>
-        <div className={classes.pagination}>
-          <a href="#">&laquo;</a>
-          <a href="#">1</a>
-          <a className="active" href="#">
-            2
-          </a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">&raquo;</a>
-        </div>
-      </div>
+      <nav>
+        <ul className={classes.pagination}>
+          {pageNumbers.map((number) => (
+            <li
+              key={number}
+              className={
+                number === currentPage
+                  ? `${classes.pageItem} ${classes.active}`
+                  : `${classes.pageItem}`
+              }
+            >
+              <div
+                onClick={() => (number === currentPage ? event.preventDefault() : paginate(number))}
+                className={classes.pageLink}
+              >
+                {number}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </>
   );
 }

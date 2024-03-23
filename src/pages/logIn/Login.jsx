@@ -5,6 +5,10 @@ import axios from '@/apis/axios.js';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext.jsx';
 import { ErrorMessage } from '@components/common/Common.jsx';
+import { toastNotification } from '@components/common/ToastNotify.jsx';
+import { TOAST_MESSAGE, TOAST_TYPE } from '@/common/const/toast.js';
+import { ToastContainer } from 'react-toastify';
+import { fetchSignInReq } from '@/apis/auth.js';
 
 export default function Login() {
   const { setTokens } = useContext(AuthContext);
@@ -17,16 +21,21 @@ export default function Login() {
 
   const onSubmit = async (form) => {
     const user = JSON.stringify(form);
-    const { status, data } = await axios.post('/api/v1/auth/sign-in', user);
+    const { status, data } = await fetchSignInReq(user);
 
     if (status === 200) {
       setTokens(data);
       navigate('/');
+    } else if (status === 401 || status === 400) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className={classes.loginContainer}>
         <div className={classes.loginCard}>
           <h2>로그인</h2>

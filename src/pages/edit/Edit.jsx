@@ -57,6 +57,19 @@ export default function Edit() {
     setToggles(toggles.includes(selectValue) ? [...toggles] : [...toggles, selectValue]);
   };
 
+  const handleCheckBox = ({ target }) => {
+    const { value, checked } = target;
+
+    setDatas((prevState) => ({
+      ...prevState,
+      userPayload: {
+        ...prevState.userPayload,
+        [value === 'email' ? 'send_email' : 'send_kakao']: checked ? 'Y' : 'N',
+      },
+    }));
+    console.log(target.value);
+  };
+
   const removeToggle = ({ target }) => {
     const selectValue = target.innerText;
 
@@ -104,6 +117,34 @@ export default function Edit() {
                 value={datas.userPayload?.email || ''}
                 readOnly={true}
               />
+            </div>
+            <div className={classes.checkboxWrapper}>
+              <div>
+                <input
+                  id="emailCheck"
+                  className={`${classes.checkboxInput} ${classes.email}`}
+                  type="checkbox"
+                  value={'email'}
+                  checked={datas.userPayload?.send_email === 'Y' ? true : false}
+                  onChange={handleCheckBox}
+                />
+                <label htmlFor="emailCheck" className={classes.checkboxLabel}>
+                  EMAIL
+                </label>
+              </div>
+              <div>
+                <input
+                  id="kakaoCheck"
+                  className={`${classes.checkboxInput} ${classes.kakao}`}
+                  type="checkbox"
+                  value={'kakao'}
+                  checked={datas.userPayload?.send_kakao === 'Y' ? true : false}
+                  onChange={handleCheckBox}
+                />
+                <label htmlFor="kakaoCheck" className={classes.checkboxLabel}>
+                  KAKAO
+                </label>
+              </div>
             </div>
             <div className={classes.formGroup}>
               <button>수정</button>
