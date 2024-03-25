@@ -1,7 +1,6 @@
 import classes from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import axios from '@/apis/axios.js';
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/AuthContext.jsx';
 import { ErrorMessage } from '@components/common/Common.jsx';
@@ -31,6 +30,10 @@ export default function Login() {
     } else {
       toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
     }
+  };
+
+  const kakaoLogin = () => {
+    location.href = `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/oauth2/kakao`;
   };
 
   return (
@@ -70,7 +73,12 @@ export default function Login() {
             </div>
             <input type="submit" disabled={isSubmitting} value="로그인" />
           </form>
-          <button className={classes.kakaoLogin}>카카오로 시작하기</button>
+          <div className={classes.kakaoLogin}>
+            <a onClick={kakaoLogin}>
+              <img src="/kakao_login.png" />
+            </a>
+          </div>
+          {/*<button onClick={kakaoLogin} className={classes.kakaoLogin}>카카오 로그인</button>*/}
         </div>
       </div>
     </>

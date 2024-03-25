@@ -3,6 +3,7 @@ import News from '../pages/news/News.jsx';
 import Edit from '../pages/edit/Edit.jsx';
 import Login from '../pages/logIn/Login.jsx';
 import SignUp from '../pages/signUp/SignUp.jsx';
+import Oauth from '@/pages/oauth/Oauth.jsx';
 
 const routes = [
   {

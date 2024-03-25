@@ -61,3 +61,20 @@ export const fetchSignInReq = async (singInReq) => {
     return e.response;
   }
 };
+
+/**
+ * logout
+ * @returns {Promise<axios.AxiosResponse<any>|any>}
+ */
+export const fetchLogout = async () => {
+  try {
+    return await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/logout`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
+  } catch (e) {
+    console.error('fetchLogout : ', e);
+    return e.response;
+  }
+};
