@@ -6,7 +6,7 @@ export default function NewsItem({ news }) {
       <div>
         <a target="_blank" href={news.url} className={classes.newsItem}>
           <img
-            src={`${import.meta.env.VITE_API_BASE_URL}${news.image_url}`}
+            src={`${import.meta.env.VITE_API_BASE_URL}${news.custom_image_url}`}
             alt="뉴스 이미지"
             className={classes.newsImg}
           />

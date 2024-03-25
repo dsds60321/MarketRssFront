@@ -1,12 +1,19 @@
 import classes from './Edit.module.css';
-import { fetchStockRegist, fetchUserDetails } from '@/apis/edit.js';
+import {
+  fetchKakaoFeed,
+  fetchStockRegist,
+  fetchUserDetail,
+  fetchUserDetails,
+} from '@/apis/edit.js';
 import { useEffect, useRef, useState } from 'react';
 import { toastNotification } from '@components/common/ToastNotify.jsx';
 import { TOAST_MESSAGE, TOAST_TYPE } from '@/common/const/toast.js';
 import { US_STOCK } from '@/assets/usStock.js';
 import { ToastContainer } from 'react-toastify';
+import { regex } from '@/common/const/regex.js';
 export default function Edit() {
   const [datas, setDatas] = useState({});
+  const [isEdit, setIsEdit] = useState(false);
   const [toggles, setToggles] = useState([]);
   const [originToggles, setOriginToggles] = useState([]);
   const divRef = useRef(null);
@@ -47,6 +54,17 @@ export default function Edit() {
     };
   }, []);
 
+  const handleUserData = (e) => {
+    setDatas({
+      ...datas,
+      userPayload: {
+        ...datas.userPayload,
+        [e.target.name]: e.target.value,
+      },
+    });
+    setIsEdit(true);
+  };
+
   const handleToggles = ({ target }) => {
     const selectValue = target.value;
 
@@ -67,7 +85,6 @@ export default function Edit() {
         [value === 'email' ? 'send_email' : 'send_kakao']: checked ? 'Y' : 'N',
       },
     }));
-    console.log(target.value);
   };
 
   const removeToggle = ({ target }) => {
@@ -82,7 +99,7 @@ export default function Edit() {
       toastNotification({ type: TOAST_TYPE.DEFAULT, text: TOAST_MESSAGE.NO_CHANGES_DETECTED });
       return;
     }
-    const { status, data } = await fetchStockRegist({ stocks: toggles });
+    const { status } = await fetchStockRegist({ stocks: toggles });
     if (status === 200) {
       toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.SUCCESS });
       location.reload();
@@ -93,6 +110,38 @@ export default function Edit() {
     }
   };
 
+  const edit = async () => {
+    if (!isEdit) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+      return;
+    }
+    const { email, send_email } = datas.userPayload;
+
+    if (!email || !send_email) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+      return;
+    }
+
+    if (!regex.email.test(email)) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+      return;
+    }
+
+    const { status } = await fetchUserDetail(datas.userPayload);
+
+    if (status === 200) {
+      toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.SUCCESS });
+    } else if (status === 401) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
+    }
+  };
+
+  const kakaoFeed = async () => {
+    const { status } = await fetchKakaoFeed();
+    console.log(status);
+  };
   return (
     <>
       <div className="content">
@@ -104,20 +153,23 @@ export default function Edit() {
               <label htmlFor="id">아이디</label>
               <input type="text" id="id" value={datas.userPayload?.userId || ''} readOnly={true} />
             </div>
-            <div className={classes.formGroup}>
-              <label htmlFor="password">패스워드</label>
-              <input type="password" id="password" placeholder="패스워드 입력" />
-            </div>
-            <div className={classes.formGroup}>
-              <label htmlFor="email">이메일</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="이메일 입력"
-                value={datas.userPayload?.email || ''}
-                readOnly={true}
-              />
-            </div>
+            {/*<div className={classes.formGroup}>*/}
+            {/*  <label htmlFor="password">패스워드</label>*/}
+            {/*  <input type="password" id="password" placeholder="패스워드 입력" />*/}
+            {/*</div>*/}
+            {datas.userPayload?.send_email === 'Y' && (
+              <div className={classes.formGroup}>
+                <label htmlFor="email">이메일</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="이메일 입력"
+                  value={datas.userPayload?.email || ''}
+                  onChange={handleUserData}
+                />
+              </div>
+            )}
+
             <div className={classes.checkboxWrapper}>
               <div>
                 <input
@@ -147,8 +199,13 @@ export default function Edit() {
               </div>
             </div>
             <div className={classes.formGroup}>
-              <button>수정</button>
+              <button onClick={edit}>수정</button>
             </div>
+            {datas.userPayload?.send_kakao === 'Y' && (
+              <div className={`${classes.formGroup} ${classes.kakao}`}>
+                <button onClick={kakaoFeed}>카카오톡 피드 받기</button>
+              </div>
+            )}
           </div>
 
           <div className={classes.card}>

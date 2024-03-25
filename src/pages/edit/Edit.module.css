@@ -150,6 +150,16 @@
   color: #aaa;
 }
 
+.kakao button{
+  background-color: rgb(252, 229, 0);
+  color: black;
+}
+
+.kakao button:hover {
+  background-color: rgb(213, 197, 80);
+  color: #fff;
+}
+
 /* 기존 리스트 박스 스타일링에 추가 */
 .scrollIndicator {
   text-align: center;

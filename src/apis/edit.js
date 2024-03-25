@@ -17,3 +17,21 @@ export const fetchStockRegist = async (stockReq) => {
     return e.response;
   }
 };
+
+export const fetchUserDetail = async (userReq) => {
+  try {
+    return await axios.post('/edit', userReq);
+  } catch (e) {
+    console.log(e);
+    return e.response;
+  }
+};
+
+export const fetchKakaoFeed = async () => {
+  try {
+    return await axios.get('/edit/kakao');
+  } catch (e) {
+    console.log(e);
+    return e.response;
+  }
+};
