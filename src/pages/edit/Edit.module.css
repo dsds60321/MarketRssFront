@@ -15,14 +15,6 @@
   padding: 20px;
 }
 
-@media (min-width: 768px) {
-  .editContainer {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-  }
-}
-
 .card {
   background: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -71,12 +63,6 @@
   border-radius: 8px;
 }
 
-@media (max-width: 480px) {
-  .selections {
-    display: inline;
-  }
-}
-
 .tag {
   display: grid;
   place-items: center;
@@ -99,10 +85,36 @@
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5); /* 마우스 호버 시 그림자 강조 */
 }
 
+@media (min-width: 768px) {
+  .editContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 480px) {
+
+  .selections {
+    display: inline;
+  }
+
   .tag {
     font-size: 8px;
     padding: 5px 10px;
+  }
+
+  input,option,select,button {
+    padding: 5px !important;
+  }
+
+  input,button,option,select,label {
+    font-size: 8px;
+  }
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 

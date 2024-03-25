@@ -1,4 +1,5 @@
 .header {
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   background-color: #ffffff; /* 배경색 변경: */
@@ -38,4 +39,21 @@
 
 .header li a:hover {
   color: #afafaf; /* 호버 시 글자색 변경 */
+}
+
+@media (max-width: 480px) {
+  .header {
+    margin: 0 auto;
+    height: 40px; /* 스마트폰에서의 높이 조정 */
+    width: 80%;
+  }
+
+  .header nav {
+    display: flex;
+  }
+
+  .header li a {
+    font-size: 15px;
+    padding: 10px 2vh;
+  }
 }

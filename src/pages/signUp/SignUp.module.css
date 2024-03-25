@@ -67,3 +67,9 @@ input[type='email'] {
   cursor: auto !important;
   background-color: #dcdcdc !important;
 }
+
+@media (max-width: 480px) {
+  .signupForm form {
+    max-width: 250px;
+  }
+}

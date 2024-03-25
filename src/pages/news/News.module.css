@@ -18,6 +18,7 @@
 @media (min-width: 576px) and (max-width: 767px) {
   .contentWrapper {
     min-height: 80vh; /* 소형 기기에 맞춤 */
+
   }
 }
 
@@ -25,6 +26,15 @@
 @media (max-width: 575px) {
   .contentWrapper {
     min-height: 83vh; /* 매우 소형 기기에 맞춤 */
+  }
+
+  .newsList {
+    h3 {
+      font-size: small;
+    }
+    p {
+      font-size: 10px;
+    }
   }
 }
 

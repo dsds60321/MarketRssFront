@@ -57,3 +57,10 @@
   color: #999;
   margin-top: 10px;
 }
+
+/* 매우 소형 기기 (소형 스마트폰, 화면 너비가 575px 이하) */
+@media (max-width: 575px) {
+  .newsDate {
+    font-size: 6px;
+  }
+}

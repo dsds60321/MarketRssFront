@@ -57,3 +57,31 @@
   color: red;
   background-color: rgb(0 0 0 / 13%);
 }
+
+@media (max-width: 480px) {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: space-around;
+  }
+  .loginCard {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .loginHelp {
+    font-size: 8px;
+  }
+
+  a,label {
+    font-size: 8px;
+  }
+
+  .kakaoLogin {
+    padding: 0 !important;
+  }
+  a img {
+    width: 80px;
+  }
+}
