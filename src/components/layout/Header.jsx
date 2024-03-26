@@ -10,8 +10,6 @@ export default function Header() {
   const logout = async () => {
     const { status } = await fetchLogout();
 
-    console.log(status);
-
     if (status === 200) {
       handleLogout();
       navigate('/sign-in');

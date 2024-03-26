@@ -1,10 +1,9 @@
-import { createBrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes/routes.jsx';
 import AuthContextProvider from './contexts/AuthContext.jsx';
 import { PrivateRouter } from '@/routes/PrivateRouter.jsx';
 import Login from '@/pages/logIn/Login.jsx';
 import SignUp from '@/pages/signUp/SignUp.jsx';
-import { useState } from 'react';
 import Oauth from '@/pages/oauth/Oauth.jsx';
 
 const router = createBrowserRouter([
@@ -17,7 +16,8 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: '/auth/oauth-response/:accessToken/:refreshToken',
+    // path: '/auth/oauth-response/:accessToken/:refreshToken',
+    path: '/auth/oauth-response',
     element: <Oauth />,
   },
   {

@@ -7,7 +7,7 @@ import axios from 'axios';
  */
 export const fetchDuplicateIdReq = async (id) => {
   try {
-    return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/id-check`, { id });
+    return await axios.post('/api/v1/auth/id-check', { id });
   } catch (e) {
     console.error('fetchDuplicateIdReq : ', e);
     return e.response;
