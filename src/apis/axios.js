@@ -28,7 +28,6 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    console.log('error >> ',error)
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -47,7 +46,13 @@ instance.interceptors.response.use(
       if (response.status === 200) {
         localStorage.setItem('accessToken', response.data.accessToken);
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
-        return axios(originalRequest);
+        axios(originalRequest);
+        location.reload();
+        return;
+      }
+
+      if (response.status === 401 ) {
+        location.href = '/sign-in';
       }
     }
 
