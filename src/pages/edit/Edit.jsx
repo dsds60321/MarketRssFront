@@ -184,24 +184,26 @@ export default function Edit() {
                   EMAIL
                 </label>
               </div>
-              <div>
-                <input
-                  id="kakaoCheck"
-                  className={`${classes.checkboxInput} ${classes.kakao}`}
-                  type="checkbox"
-                  value={'kakao'}
-                  checked={datas.userPayload?.send_kakao === 'Y' ? true : false}
-                  onChange={handleCheckBox}
-                />
-                <label htmlFor="kakaoCheck" className={classes.checkboxLabel}>
-                  KAKAO
-                </label>
-              </div>
+            {datas.userPayload?.type === 'kakao' && (
+                <div>
+                  <input
+                    id="kakaoCheck"
+                    className={`${classes.checkboxInput} ${classes.kakao}`}
+                    type="checkbox"
+                    value={'kakao'}
+                    checked={datas.userPayload?.send_kakao === 'Y' ? true : false}
+                    onChange={handleCheckBox}
+                  />
+                  <label htmlFor="kakaoCheck" className={classes.checkboxLabel}>
+                    KAKAO
+                  </label>
+                </div>
+              )}
             </div>
             <div className={classes.formGroup}>
               <button onClick={edit}>수정</button>
             </div>
-            {datas.userPayload?.send_kakao === 'Y' && (
+            {datas.userPayload?.type === 'kakao' && datas.userPayload?.send_kakao === 'Y' && (
               <div className={`${classes.formGroup} ${classes.kakao}`}>
                 <button onClick={kakaoFeed}>카카오톡 피드 받기</button>
               </div>
