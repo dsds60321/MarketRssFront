@@ -22,7 +22,7 @@ export const fetchDuplicateIdReq = async (id) => {
 export const fetchVerificationReq = async (certificationReq) => {
   try {
     return await axios.post(
-      `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/email-certification`,
+      '/api/v1/auth/email-certification',
       certificationReq
     );
   } catch (e) {
@@ -38,7 +38,7 @@ export const fetchVerificationReq = async (certificationReq) => {
  */
 export const fetchSignUpReq = async (signUpReq) => {
   try {
-    return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/sign-up`, signUpReq, {
+    return await axios.post('/api/v1/auth/sign-up', signUpReq, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -51,7 +51,7 @@ export const fetchSignUpReq = async (signUpReq) => {
 
 export const fetchSignInReq = async (singInReq) => {
   try {
-    return await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/sign-in`, singInReq, {
+    return await axios.post('/api/v1/auth/sign-in', singInReq, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,7 +68,7 @@ export const fetchSignInReq = async (singInReq) => {
  */
 export const fetchLogout = async () => {
   try {
-    return await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/logout`, {
+    return await axios.get('/logout', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

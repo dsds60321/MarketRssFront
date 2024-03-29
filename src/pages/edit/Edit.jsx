@@ -32,10 +32,17 @@ export default function Edit() {
   useEffect(() => {
     const getUserDetails = async () => {
       const { status, data } = await fetchUserDetails();
+      let stocks;
 
       if (status === 200) {
         setDatas({ userPayload: data.userPayload, stockPayload: data.stockPayload });
-        const stocks = data.stockPayload.stocks.filter((stock) => stock !== '');
+
+        if (data.stockPayload?.stocks) {
+          stocks = data.stockPayload?.stocks.filter((stock) => stock !== '');
+        } else {
+          stocks = [];
+        }
+
         setOriginToggles(stocks);
         setToggles(stocks);
       } else {
@@ -55,6 +62,7 @@ export default function Edit() {
   }, []);
 
   const handleUserData = (e) => {
+    console.log('before ', datas);
     setDatas({
       ...datas,
       userPayload: {
@@ -63,6 +71,7 @@ export default function Edit() {
       },
     });
     setIsEdit(true);
+    console.log('after ', datas);
   };
 
   const handleToggles = ({ target }) => {
@@ -85,6 +94,7 @@ export default function Edit() {
         [value === 'email' ? 'send_email' : 'send_kakao']: checked ? 'Y' : 'N',
       },
     }));
+    setIsEdit(true);
   };
 
   const removeToggle = ({ target }) => {
@@ -115,14 +125,20 @@ export default function Edit() {
       toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
+
     const { email, send_email } = datas.userPayload;
 
-    if (!email || !send_email) {
+    if (!send_email) {
       toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
 
-    if (!regex.email.test(email)) {
+    if (send_email === 'Y' && !email) {
+      toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
+      return;
+    }
+
+    if (send_email === 'Y' && !regex.email.test(email)) {
       toastNotification({ type: TOAST_TYPE.WARN, text: TOAST_MESSAGE.BAD_REQUEST });
       return;
     }
@@ -140,8 +156,14 @@ export default function Edit() {
 
   const kakaoFeed = async () => {
     const { status } = await fetchKakaoFeed();
-    console.log(status);
+
+    if (status === 200 ) {
+      toastNotification({ type: TOAST_TYPE.SUCCESS, text: TOAST_MESSAGE.SUCCESS });
+    } else {
+      toastNotification({ type: TOAST_TYPE.ERROR, text: TOAST_MESSAGE.ERROR });
+    }
   };
+
   return (
     <>
       <div className="content">
@@ -178,7 +200,9 @@ export default function Edit() {
                   type="checkbox"
                   value={'email'}
                   checked={datas.userPayload?.send_email === 'Y' ? true : false}
-                  onChange={handleCheckBox}
+                  onClick={(e) => {
+                    handleCheckBox(e);
+                  }}
                 />
                 <label htmlFor="emailCheck" className={classes.checkboxLabel}>
                   EMAIL
@@ -192,7 +216,9 @@ export default function Edit() {
                     type="checkbox"
                     value={'kakao'}
                     checked={datas.userPayload?.send_kakao === 'Y' ? true : false}
-                    onChange={handleCheckBox}
+                    onChange={(e) => {
+                      handleCheckBox(e);
+                    }}
                   />
                   <label htmlFor="kakaoCheck" className={classes.checkboxLabel}>
                     KAKAO
