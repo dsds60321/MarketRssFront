@@ -48,12 +48,13 @@ instance.interceptors.response.use(
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
         axios(originalRequest);
         location.reload();
-        return;
       }
+    }
 
-      if (response.status === 401 ) {
-        location.href = '/sign-in';
-      }
+    const { response } = error;
+
+    if (response.status === 401 && response.data.code === 'TE') {
+      location.href = '/sign-in';
     }
 
     return Promise.reject(error);
